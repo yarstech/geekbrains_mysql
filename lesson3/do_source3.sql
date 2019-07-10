@@ -78,6 +78,12 @@ INSERT INTO storehouses_products (storehouse_id, product_id, value) VALUES
   
  SELECT * FROM  storehouses_products order by if(VALUE = 0, 9999999999, VALUE);
 
+-- Задание 3-4
+-- (по желанию) Из таблицы users необходимо извлечь пользователей, родившихся в августе и мае. 
+-- Месяцы заданы в виде списка английских названий ('may', 'august')
+
+SELECT name, monthname(birthday_at) FROM users WHERE monthname(birthday_at) IN ('may', 'august');
+
 -- Задание 3-5
 -- (по желанию) Из таблицы catalogs извлекаются записи при помощи запроса. 
 -- SELECT * FROM catalogs WHERE id IN (5, 1, 2); 
