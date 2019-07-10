@@ -77,4 +77,14 @@ INSERT INTO storehouses_products (storehouse_id, product_id, value) VALUES
   (2, 2, 12);
   
  SELECT * FROM  storehouses_products order by if(VALUE = 0, 9999999999, VALUE);
-          
+
+-- Задание 3-5
+-- (по желанию) Из таблицы catalogs извлекаются записи при помощи запроса. 
+-- SELECT * FROM catalogs WHERE id IN (5, 1, 2); 
+-- Отсортируйте записи в порядке, заданном в списке IN.
+
+SELECT * FROM catalogs WHERE id IN (5, 1, 2) 
+			ORDER BY (CASE 
+				WHEN id = 5 THEN 1 
+                        	WHEN id = 1 THEN 2 
+                        	WHEN id = 2 THEN 3 END); 
