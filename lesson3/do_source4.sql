@@ -14,3 +14,8 @@ SELECT IF(
             (dayofyear(birthday_at) % 7) + dayofweek('2019-01-01') - 1) AS day,
             COUNT(name)
 FROM users group by day order by day;
+
+-- Задание 4-3
+-- (по желанию) Подсчитайте произведение чисел в столбце таблицы
+
+SELECT ROUND(exp(SUM(log(product_id))), 10) FROM storehouses_products;
