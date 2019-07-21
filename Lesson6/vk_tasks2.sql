@@ -9,12 +9,12 @@ use vk;
 
 SELECT users.id AS friend, COUNT(inc.from_user_id) + COUNT(inc.to_user_id) AS mess 
   FROM users
-	   LEFT JOIN messages AS inc 
-			  ON users.id = inc.from_user_id
-			 AND inc.to_user_id = 1
-	   LEFT JOIN messages AS outc
-			  ON users.id = outc.to_user_id
-			 AND outc.from_user_id = 1 
+       LEFT JOIN messages AS inc 
+	      ON users.id = inc.from_user_id
+	     AND inc.to_user_id = 1
+       LEFT JOIN messages AS outc
+	      ON users.id = outc.to_user_id
+	     AND outc.from_user_id = 1 
  GROUP BY friend
  ORDER BY mess DESC
  LIMIT 1;
@@ -24,12 +24,12 @@ SELECT users.id AS friend, COUNT(inc.from_user_id) + COUNT(inc.to_user_id) AS me
 
 SELECT SUM(likes)
   FROM (SELECT profiles.user_id, profiles.birthday, COUNT(likes.to_subject_id) AS likes
-		  FROM profiles
-			   JOIN likes
-				 ON likes.to_subject_id = profiles.user_id
-		 GROUP BY profiles.user_id, profiles.birthday
-		 ORDER BY profiles.birthday DESC
-		 LIMIT 10) as countlikes;
+	  FROM profiles
+	       JOIN likes
+		 ON likes.to_subject_id = profiles.user_id
+	 GROUP BY profiles.user_id, profiles.birthday
+	 ORDER BY profiles.birthday DESC
+	 LIMIT 10) AS countlikes;
 
 /* 3. Определить кто больше поставил лайков (всего) - мужчины или женщины? */
 
@@ -45,11 +45,11 @@ SELECT sex
 
 SELECT users.id AS id, COUNT(media.user_id) + COUNT(likes.from_user_id) + COUNT(messages.from_user_id) AS acts
   FROM users
-	   LEFT JOIN media
+       LEFT JOIN media
               ON users.id = media.user_id
-	   LEFT JOIN likes
+       LEFT JOIN likes
               ON users.id = likes.from_user_id
-	   LEFT JOIN messages
+       LEFT JOIN messages
               ON users.id = messages.from_user_id
  GROUP BY id
  ORDER BY acts
