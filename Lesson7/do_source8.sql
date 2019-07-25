@@ -36,7 +36,7 @@ SELECT hello();
 SELECT * FROM products;
 
 DELIMITER //
-DROP TRIGGER IF EXISTS name_descr_control//
+DROP TRIGGER IF EXISTS name_descr_control_insert//
 
 CREATE TRIGGER name_descr_control_insert BEFORE INSERT ON products
 FOR EACH ROW
@@ -48,6 +48,7 @@ END//
 
 INSERT INTO products (name, description) VALUES (NULL, NULL)//
 
+DROP TRIGGER IF EXISTS name_descr_control_update//
 CREATE TRIGGER name_descr_control_update BEFORE UPDATE ON products
 FOR EACH ROW
 BEGIN
