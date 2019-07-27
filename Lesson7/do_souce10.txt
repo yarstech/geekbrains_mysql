@@ -1,0 +1,32 @@
+/* 1. В базе данных Redis подберите коллекцию для подсчета посещений с определенных IP-адресов. */
+
+HSET counters '192.168.0.1' 3
+HSET counters '192.168.0.2' 2
+HSET counters '192.168.0.3' 5
+HGETALL counters
+
+
+/* 2. При помощи базы данных Redis решите задачу поиска имени пользователя 
+по электронному адресу и наоборот, поиск электронного адреса пользователя по его имени.*/
+
+HSET email 'Yaroslav' 'yar@gmail.com'
+HSET name 'yar@gmail.com' 'Yaroslav'
+
+HSET email 'Test' 'test@gmail.com'
+HSET name 'test@gmail.com' 'Test'
+
+HGET email 'Yaroslav'
+HGET name 'yar@gmail.com'
+
+/* 3. Организуйте хранение категорий и товарных позиций учебной базы данных shop в СУБД MongoDB. */
+
+use shop
+db.shop.insert({catalog: 'Процессоры', products:[
+				{id: 1, name: 'Intel Core i3-8100', description: '', price: 7890}]})
+db.shop.update({catalog: 'Процессоры'}, {$push: 
+ 				{ products: {id: 2, name:'Intel Core i5-7400', description: '',price: 12700 } }})
+db.shop.insert({catalog: 'Материнские платы', products:[
+ 				{id: 3, name: 'Intel Core i3-8100', description: '', price: 7890}]} )
+db.shop.update({catalog: 'Материнские платы'}, {$set: 
+				{ products:[{id: 3, name: 'Gigabyte H310M S2H', description: '', price: 4790}]}} )
+db.shop.find()
